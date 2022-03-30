@@ -15,6 +15,27 @@ const studentControllers = {
       next()
     }
   },
+  getClassesByStudentId: async (req, res, next) => {
+    try {
+      const { studentId } = req.params
+      const sql = `SELECT * FROM class_student as cs
+      JOIN classes as c ON c.id = cs.class_id
+      JOIN lecturers as l ON l.id = c.lecturer_id
+      WHERE cs.student_id = ?;`
+
+      const replacement = [studentId]
+
+      const result = await query(sql, replacement);
+
+      return res.status(200).json({
+        message: "Find students",
+        result
+      })
+
+    } catch (err) {
+      next()
+    }
+  },
   createStudent: async (req, res, next) => {
     try {
       const { student_name, faculty_id } = req.body

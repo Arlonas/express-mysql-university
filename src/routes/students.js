@@ -11,5 +11,6 @@ router.post("/:studentId/class", studentControllers.addStudentToClass)
 router.post("/:studentId/club", studentControllers.addStudentToClub)
 
 router.delete("/:studentId/club/:clubId", studentControllers.removeStudentFromClub)
+router.get("/:studentId/classes", studentControllers.getClassesByStudentId)
 
 module.exports = router
